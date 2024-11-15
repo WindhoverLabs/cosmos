@@ -3,7 +3,7 @@ set -eux
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 cd $SCRIPT_DIR
-source ./openc3_env.sh
+. ./openc3_env.sh
 
 export USER=`whoami`
 
@@ -30,16 +30,16 @@ cd $SCRIPT_DIR/../../../openc3-cosmos-script-runner-api
 sudo -E bundle config set --local without 'development'
 sudo -E bundle install --quiet
 
-if [ -f "/etc/centos-release" ]; then
-  sudo yum install epel-release -y || true
-else
-  sudo subscription-manager repos --enable rhel-*-optional-rpms \
-                           --enable rhel-*-extras-rpms \
-                           --enable rhel-ha-for-rhel-*-server-rpms
-  sudo subscription-manager repos --disable=rhel-7-server-e4s-optional-rpms --disable=rhel-7-server-eus-optional-rpms
-  sudo yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm || true
-fi
-sudo yum install nodejs npm -y
+# if [ -f "/etc/centos-release" ]; then
+#   sudo install install epel-release -y || true
+# else
+#   sudo subscription-manager repos --enable rhel-*-optional-rpms \
+#                            --enable rhel-*-extras-rpms \
+#                            --enable rhel-ha-for-rhel-*-server-rpms
+#   sudo subscription-manager repos --disable=rhel-7-server-e4s-optional-rpms --disable=rhel-7-server-eus-optional-rpms
+#   sudo install install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm || true
+# fi
+sudo apt install nodejs npm -y
 sudo npm install --global yarn
 
 cd $SCRIPT_DIR/../../../openc3-cosmos-init/plugins/

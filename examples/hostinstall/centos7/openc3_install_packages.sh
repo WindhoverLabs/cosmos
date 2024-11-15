@@ -1,18 +1,18 @@
 #!/bin/sh
 set -eux
 
-sudo yum update -y && sudo yum install -y \
+sudo apt update -y && sudo apt install -y \
   gcc \
-  gcc-c++ \
-  gdbm-devel \
-  iproute \
-  libyaml-devel \
-  libffi-devel \
+  g++ \
+  libgdbm-dev \
+  iproute2 \
+  libyaml-dev \
+  libffi-dev \
   make \
-  ncurses-devel \
+  ncurses-dev \
   net-tools \
-  nc \
-  openssl-devel \
-  readline-devel \
+  netcat \
+  libssl-dev \
+  libreadline-dev \
   wget \
-  zlib-devel
+  zlib1g-dev

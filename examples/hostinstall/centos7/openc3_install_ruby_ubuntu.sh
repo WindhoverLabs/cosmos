@@ -24,27 +24,32 @@ export RUBY_DOWNLOAD_SHA256=88cc7f0f021f15c4cd62b1f922e3a401697f7943551fe45b1fdf
 wget -O ruby.tar.xz "https://cache.ruby-lang.org/pub/ruby/${RUBY_MAJOR%-rc}/ruby-$RUBY_VERSION.tar.xz"
 echo "$RUBY_DOWNLOAD_SHA256 *ruby.tar.xz" | sha256sum --check --strict;
 sudo mkdir -p /usr/src/ruby
-sudo tar -xJf ruby.tar.xz -C /usr/src/ruby --strip-components=1
+# sudo tar -xJf ruby.tar.xz -C /usr/svrc/ruby --strip-components=1
+tar -xJf ruby.tar.xz
 rm ruby.tar.xz;
+cd ruby-$RUBY_VERSION
 
 # hack in "ENABLE_PATH_CHECK" disabling to suppress:
 #   warning: Insecure world writable dir
-{ \
-	echo '#define ENABLE_PATH_CHECK 0'; \
-	echo; \
-	cat /usr/src/ruby/file.c; \
-} > file.c.new;
-sudo mv file.c.new /usr/src/ruby/file.c
+# { \
+# 	echo '#define ENABLE_PATH_CHECK 0'; \
+# 	echo; \
+# 	cat /usr/src/ruby/file.c; \
+# } > file.c.new;
+# sudo mv file.c.new /usr/src/ruby/file.c
 
-cd /usr/src/ruby;
+# cd /usr/src/ruby;
 
-sudo ./configure --disable-install-doc --enable-shared --prefix=/usr
+# sudo apt install -y libdb-dev libgdbm-dev libgdbm-compat-dev libreadline-dev
 
-sudo make -j "$(nproc)"
+# sudo ./configure --disable-install-doc --enable-shared --prefix=/usr
+./configure 
+
+make -j "$(nproc)"
 sudo make install
 
-cd /
-sudo rm -r /usr/src/ruby
+# cd /
+# sudo rm -r /usr/src/ruby
 
 # rough smoke test
 ruby --version

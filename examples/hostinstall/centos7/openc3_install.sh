@@ -5,7 +5,7 @@
 ./openc3_install_packages.sh
 
 # Install Ruby
-./openc3_install_ruby.sh
+#./openc3_install_ruby_ubuntu.sh
 
 # Install Redis
 ./openc3_install_redis.sh

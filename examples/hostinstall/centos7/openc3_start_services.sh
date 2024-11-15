@@ -3,7 +3,7 @@ set -x
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 cd $SCRIPT_DIR
-source ./openc3_env.sh
+. ./openc3_env.sh
 
 # Start Redis
 redis-server /config/redis.conf &
